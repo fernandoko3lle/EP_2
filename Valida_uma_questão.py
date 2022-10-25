@@ -5,7 +5,16 @@ def valida_questao(dic_entrada):
             if 'titulo' != '' and 'titulo' != ' ':
                 if 'nivel' in ('facil', 'medio', 'dificil'):
                     if len('opções'.values()) == 4:
-                        if ('A', 'B', 'C', 'D') in 'opções'.keys():
+                        if ('A', 'B', 'C', 'D') == 'opções'.keys():
+                            dic_saida = {}
+                        else:
+                    else:
+                else:
+            else:
+        else:
+    else:
+        
+                            
                             
                             
 
