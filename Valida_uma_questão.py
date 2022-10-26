@@ -1,18 +1,11 @@
 def valida_questao(dic_entrada): 
     dic_saida = {}
-    if ('titulo', 'nivel', 'opcoes', 'correta') in dic_saida.keys():
-        if len(dic_saida.keys()) == 4:
-            if 'titulo' != '' and 'titulo' != ' ':
-                if 'nivel' in ('facil', 'medio', 'dificil'):
-                    if len('opções'.values()) == 4:
-                        if ('A', 'B', 'C', 'D') == 'opções'.keys():
-                            dic_saida = {}
-                        else:
-                    else:
-                else:
-            else:
-        else:
-    else:
+    for chave in dic_entrada.keys():
+        if chave not in('titulo', 'nivel', 'opcoes', 'correta'):
+            dic_saida[chave] = 'nao_encontrado'
+        if len(dic_entrada.keys()) == 4:
+             
+
         
                             
                             
