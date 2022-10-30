@@ -1,6 +1,5 @@
 import random 
 def gera_ajuda(questao):
-    repetidas = []
     l_respostas_erradas = []
     dica = []
     correta = questao['correta']
