@@ -7,4 +7,6 @@ def transforma_base(lista):
                     dic_nivel[valor].append(Q)
                 else:
                     dic_nivel[valor] = [Q]
-    return dic_nivel 
+    return dic_nivel
+
+print('batata')
