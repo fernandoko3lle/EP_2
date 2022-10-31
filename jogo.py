@@ -163,6 +163,20 @@ quest = [{'titulo': 'Qual o resultado da operação 57 + 32?',
           'correta': 'D'}
         ]
 
+# NIVEIS   
+niveis = {
+    0: "facil",
+    1: "médio",
+    2: "dicícil",
+}
+
+# FUNÇÕES 
+
+
+# CONTADORES 
+id = 1
+n = 0 
+
 # INTRODUÇÃO
 nome = input('''Bem vindo ao Fortuna DesSoft,
 Digite seu nome para começar: ''')
@@ -194,3 +208,8 @@ def sorteia_questao_inedida(quest, nivel, repetidas):
                 repetidas.append(q_sort)
             c += 1
     return q_sort
+
+
+pergunta = sorteia_questao_inedida(quest, niveis[n//3], repetidas)
+
+n += 1
