@@ -11,3 +11,5 @@ def sorteia_questao_inedida(dic_questoes, nivel, sort):
             c += 1
     return q_sort
 
+
+print('oi')
