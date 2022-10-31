@@ -4,9 +4,9 @@ def gera_ajuda(questao):
     dica = []
     correta = questao['correta']
     dic_questoes = questao['opcoes']
-    del dic_questoes[correta]
     for r in dic_questoes.values():
-        l_respostas_erradas.append(r)
+        if r != dic_questoes[correta]:
+            l_respostas_erradas.append(r)
     contagem = random.choice(range(2))
     contagem = contagem+1
     for a in range(contagem):
