@@ -1,18 +1,7 @@
-nome = input('''Bem vindo ao Fortuna DesSoft,
-Digite seu nome para começar: ''')
-print('''
-Olá {0}, pronto para ser o mais novo milinonário?
-No Fortuna você terá que responder perguntas de multiplas escolha podendo ganhar até 1 milhão de reais!!!!
-Cada resposta correta aumentará seu premio!!!
+# IMPORTAÇÕES
+import random
 
-CUIDADO basta uma resposta incorreta para perder tudo.
-
-Durante o jogo você terá direito de pular 2 perguntas e solicitar 3 ajudas para os universitários.
-Para pular ou pedir ajuda digite: 'pula' ou 'ajuda'
-Você pode parar a qualquer momento do jogo, para isso digite: 'parar' 
-
-BOA SORTE, QUE A FORTUNA ESTEJA COM VOCE'''.format(nome))
-
+# LIB QUEST
 quest = [{'titulo': 'Qual o resultado da operação 57 + 32?',
           'nivel': 'facil',
           'opcoes': {'A': '-19', 'B': '85', 'C': '89', 'D': '99'},
@@ -173,3 +162,35 @@ quest = [{'titulo': 'Qual o resultado da operação 57 + 32?',
           'opcoes': {'A': 'Uma banda de Rock', 'B': 'Uma marca de luxo', 'C': 'Cidade Francesa', 'D': 'Morte de tecido orgânico'},
           'correta': 'D'}
         ]
+
+# INTRODUÇÃO
+nome = input('''Bem vindo ao Fortuna DesSoft,
+Digite seu nome para começar: ''')
+print('''
+Olá {0}, pronto para ser o mais novo milinonário?
+No Fortuna você terá que responder perguntas de multiplas escolha podendo ganhar até 1 milhão de reais!!!!
+Cada resposta correta aumentará seu premio!!!
+
+CUIDADO basta uma resposta incorreta para perder tudo.
+
+Durante o jogo você terá direito de pular 2 perguntas e solicitar 3 ajudas para os universitários.
+Para pular ou pedir ajuda digite: 'pula' ou 'ajuda'
+Você pode parar a qualquer momento do jogo, para isso digite: 'parar' 
+
+BOA SORTE, QUE A FORTUNA ESTEJA COM VOCE'''.format(nome))
+
+# LISTA DE REPETIDAS
+repetidas = []
+
+# SORTEANDO UMA QUESTÃO 
+def sorteia_questao(quest, nivel):
+    return random.choice(quest[nivel])
+def sorteia_questao_inedida(quest, nivel, repetidas): 
+    c = 0 
+    for q, r in quest.items():
+        if q == nivel:
+            if r[c] not in repetidas:
+                q_sort = sorteia_questao(quest, nivel)
+                repetidas.append(q_sort)
+            c += 1
+    return q_sort
