@@ -192,12 +192,11 @@ QUESTAO {0}
 
 {1}
 
-RESPOSTAS:
+ALTERNATIVAS:
 A: {2}
 B: {3}
 C: {4}
 D: {5}
-
 '''.format(id,dic_questao['titulo'],dic_questao['opcoes']['A'],dic_questao['opcoes']['B'], dic_questao['opcoes']['C'], dic_questao['opcoes']['D'])
 
 # CONTADORES 
@@ -218,14 +217,22 @@ Durante o jogo você terá direito de pular 2 perguntas e solicitar 3 ajudas par
 Para pular ou pedir ajuda digite: 'pula' ou 'ajuda'
 Você pode parar a qualquer momento do jogo, para isso digite: 'parar' 
 
-BOA SORTE, QUE A FORTUNA ESTEJA COM VOCE'''.format(nome))
+BOA SORTE, QUE A FORTUNA ESTEJA COM VOCE
+'''.format(nome))
 
 # SORTEANDO UMA QUESTÃO
 # FACEIS
 i = 0 
 while i < 3: 
     pergunta = sorteia_questao_inedida(quest, niveis[n//3], sort)
-    
+    pergunta_texto = questao_para_texto(pergunta,id)
+    print(pergunta_texto)
+    resposta = str(input('Digite sua resposta: '))
+    for g in quest:
+        alternativa_correta = g['correta']
+        print(alternativa_correta)
+        break
     i += 1
     id += 1
-resposta_usuario = input('digite a alternativa correta:')
+
+#resposta_usuario = input('digite a alternativa correta:')
