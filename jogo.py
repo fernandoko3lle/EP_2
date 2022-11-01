@@ -171,7 +171,17 @@ niveis = {
 }
 
 # FUNÇÕES 
-
+def sorteia_questao(quest, nivel):
+    return random.choice(quest[nivel])
+def sorteia_questao_inedida(dic_questoes, nivel, sort): 
+    c = 0 
+    for q, r in dic_questoes.items():
+        if q == nivel:
+            if r[c] not in sort:
+                q_sort = sorteia_questao(dic_questoes, nivel)
+                sort.append(q_sort)
+            c += 1
+    return q_sort
 
 # CONTADORES 
 id = 1
@@ -196,20 +206,11 @@ BOA SORTE, QUE A FORTUNA ESTEJA COM VOCE'''.format(nome))
 # LISTA DE REPETIDAS
 repetidas = []
 
-# SORTEANDO UMA QUESTÃO 
-def sorteia_questao(quest, nivel):
-    return random.choice(quest[nivel])
-def sorteia_questao_inedida(quest, nivel, repetidas): 
-    c = 0 
-    for q, r in quest.items():
-        if q == nivel:
-            if r[c] not in repetidas:
-                q_sort = sorteia_questao(quest, nivel)
-                repetidas.append(q_sort)
-            c += 1
-    return q_sort
-
-
-pergunta = sorteia_questao_inedida(quest, niveis[n//3], repetidas)
-
-n += 1
+# SORTEANDO UMA QUESTÃO
+i = 0 
+while i < 3: 
+    pergunta = sorteia_questao_inedida(quest, niveis[n//3], repetidas)
+    print(pergunta)
+    n += 1
+    
+input('digite a alternativa correta:' )
