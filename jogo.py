@@ -213,4 +213,4 @@ while i < 3:
     print(pergunta)
     n += 1
     
-input('digite a alternativa correta:' )
+resposta_usuario = input('digite a alternativa correta:' )
