@@ -163,6 +163,9 @@ quest = [{'titulo': 'Qual o resultado da operação 57 + 32?',
           'correta': 'D'}
         ]
 
+#VARIAVEIS GLOBAIS
+sort = []
+
 # NIVEIS   
 niveis = {
     0: "facil",
@@ -172,16 +175,30 @@ niveis = {
 
 # FUNÇÕES 
 def sorteia_questao(quest, nivel):
-    return random.choice(quest[nivel])
-def sorteia_questao_inedida(dic_questoes, nivel, sort): 
-    c = 0 
-    for q, r in dic_questoes.items():
-        if q == nivel:
-            if r[c] not in sort:
-                q_sort = sorteia_questao(dic_questoes, nivel)
-                sort.append(q_sort)
-            c += 1
-    return q_sort
+    lista_possiveis = []
+    for i in quest:
+        if i['nivel'] == nivel:
+            lista_possiveis.append(i)
+    return random.choice(lista_possiveis)
+def sorteia_questao_inedida(quest, nivel, sort): 
+    for b in range(len(quest)):
+        q_sort = sorteia_questao(quest, nivel)
+        if q_sort not in sort:
+            sort.append(q_sort)
+            return q_sort
+def questao_para_texto(dic_questao, id):
+  return ''' ----------------------------------------
+QUESTAO {0}
+
+{1}
+
+RESPOSTAS:
+A: {2}
+B: {3}
+C: {4}
+D: {5}
+
+'''.format(id,dic_questao['titulo'],dic_questao['opcoes']['A'],dic_questao['opcoes']['B'], dic_questao['opcoes']['C'], dic_questao['opcoes']['D'])
 
 # CONTADORES 
 id = 1
@@ -203,14 +220,12 @@ Você pode parar a qualquer momento do jogo, para isso digite: 'parar'
 
 BOA SORTE, QUE A FORTUNA ESTEJA COM VOCE'''.format(nome))
 
-# LISTA DE REPETIDAS
-repetidas = []
-
 # SORTEANDO UMA QUESTÃO
+# FACEIS
 i = 0 
 while i < 3: 
-    pergunta = sorteia_questao_inedida(quest, niveis[n//3], repetidas)
-    print(pergunta)
-    n += 1
+    pergunta = sorteia_questao_inedida(quest, niveis[n//3], sort)
     
-resposta_usuario = input('digite a alternativa correta:' )
+    i += 1
+    id += 1
+resposta_usuario = input('digite a alternativa correta:')
