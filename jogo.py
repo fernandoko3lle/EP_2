@@ -174,18 +174,17 @@ niveis = {
 }
 
 # FUNÇÕES 
-def sorteia_questao(quest, nivel):
-    lista_possiveis = []
-    for i in quest:
-        if i['nivel'] == nivel:
-            lista_possiveis.append(i)
-    return random.choice(lista_possiveis)
-def sorteia_questao_inedida(quest, nivel, sort): 
-    for b in range(len(quest)):
-        q_sort = sorteia_questao(quest, nivel)
-        if q_sort not in sort:
-            sort.append(q_sort)
-            return q_sort
+def sorteia_questao(dic_questoes, nivel):
+    return random.choice(dic_questoes[nivel])
+def sorteia_questao_inedida(dic_questoes, nivel, sort): 
+    c = 0 
+    for q, r in dic_questoes.items():
+        if q == nivel:
+            if r[c] not in sort:
+                q_sort = sorteia_questao(dic_questoes, nivel)
+                sort.append(q_sort)
+            c += 1
+    return q_sort
 def questao_para_texto(dic_questao, id):
   return ''' ----------------------------------------
 QUESTAO {0}
@@ -219,12 +218,70 @@ def gera_ajuda(questao):
         x = 'DICA:\nOpções certamente erradas: {0}'.format(dica[0])
 
     return x 
+def valida_questao(Questão): 
+    Validação = {}
+    for chave in ('titulo', 'nivel', 'opcoes', 'correta'):
+        if chave not in Questão:
+            Validação[chave] = 'nao_encontrado'
+    if len(Questão.keys()) != 4:
+        Validação['outro'] = 'numero_chaves_invalido'
+    if 'titulo' in Questão: 
+        if Questão['titulo'].strip() == '':
+            Validação['titulo'] = 'vazio'
+    if 'nivel' in Questão:
+        if Questão['nivel'] not in ('facil', 'medio', 'dificil'):
+            Validação['nivel'] = 'valor_errado'
+    if 'opcoes' in Questão:
+        if len(Questão['opcoes'].keys()) == 4:
+            for opçao, resposta in Questão['opcoes'].items():
+                if opçao in('A', 'B', 'C', 'D'):
+                        if resposta.strip() == '':
+                            if 'opcoes' not in Validação:
+                                Validação['opcoes'] = {}
+                                Validação['opcoes'][opçao] = 'vazia'
+                            else:
+                                Validação['opcoes'][opçao] = 'vazia'
+                else:
+                    Validação['opcoes'] = 'chave_invalida_ou_nao_encontrada'
+        else: 
+            Validação['opcoes'] = 'tamanho_invalido'
+    if 'correta' not in Validação:
+        if Questão['correta'] not in ('A', 'B', 'C', 'D'):
+            Validação['correta'] = 'valor_errado'
+    return Validação
+def valida_questoes(questoes):
+    lista_validada = []
+    for i in questoes:
+        val = valida_questao(i)
+        lista_validada.append(val)
+    return lista_validada
+def transforma_base(lista):
+    dic_nivel = {}
+    for Q in lista:
+        for chave, valor in Q.items():
+            if chave == 'nivel':
+                if valor in dic_nivel:
+                    dic_nivel[valor].append(Q)
+                else:
+                    dic_nivel[valor] = [Q]
+    return dic_nivel
 
 # CONTADORES 
 id = 1
 n = 0 
 ajuda = 3
 pula = 2
+
+# VALIDANDO LISTA DE QUESTÕES  
+valida = valida_questoes(quest)
+    #deve retornar uma lista com dicionarios vazios. 
+lista_dic_emp = ['{}, ' * (len(quest) - 1) + '{}']
+
+
+# TRANSFORMANDO LISTA DE QUESTÕES EM UM DICIONARIO COM SEPARAÇÃO POR NIVEL 
+dic_questoes = transforma_base(quest)
+
+
 
 # INTRODUÇÃO
 nome = input('''Bem vindo ao Fortuna DesSoft,
@@ -244,110 +301,19 @@ BOA SORTE, QUE A FORTUNA ESTEJA COM VOCE
 '''.format(nome))
 
 # SORTEANDO UMA QUESTÃO
-# FACEIS
-i = 0 
-while i < 3: 
-    pergunta = sorteia_questao_inedida(quest, niveis[n//3], sort)
-    pergunta_texto = questao_para_texto(pergunta,id)
-    print(pergunta_texto)
-    resposta = str(input('Digite sua resposta: '))
-    for g in quest:
-        if g == pergunta:
-            alternativa_correta = g['correta']
-    if resposta == 'pula':
-        if pula > 0:
-            print('pulado')
-        else:
-            print('SEM PULOS RESTANTES')
-            resposta = str(input('Digite sua resposta: '))
-    if resposta == 'ajuda':
-        if ajuda > 0:
-            print(gera_ajuda(pergunta))
-            resposta = str(input('Digite sua resposta: '))
-            ajuda -=1
-        else:
-            print('SEM AJUDAS RESTANTES')
-            resposta = str(input('Digite sua resposta: '))
-    if resposta == alternativa_correta:
-        print('RESPOSTA CORRETA!')
-        controle = 'acertou'
-    if resposta in ('A', 'B', 'C', 'D') and resposta != alternativa_correta:
-        print('VOCE PERDEU :/')
-        controle = 'perdeu'
-        break
-    i += 1
-    id += 1
-    n += 1
 
-# MEDIAS     
-if controle == 'acertou':
-    j = 0 
-    while j < 3: 
-        pergunta = sorteia_questao_inedida(quest, niveis[n//3], sort)
-        pergunta_texto = questao_para_texto(pergunta,id)
-        print(pergunta_texto)
-        resposta = str(input('Digite sua resposta: '))
-        for g in quest:
-            if g == pergunta:
-                alternativa_correta = g['correta']
-        if resposta == 'pula':
-            if pula > 0:
-                i += 1
-            else:
-                print('SEM PULOS RESTANTES')
-                resposta = str(input('Digite sua resposta: '))
-        if resposta == 'ajuda':
-            if ajuda > 0:
-                print(gera_ajuda(pergunta))
-                resposta = str(input('Digite sua resposta: '))
-                ajuda -=1
-            else:
-                print('SEM AJUDAS RESTANTES')
-                resposta = str(input('Digite sua resposta: '))
-        if resposta == alternativa_correta:
-            print('RESPOSTA CORRETA!')
-            controle = 'acertou'
-        if resposta in ('A', 'B', 'C', 'D') and resposta != alternativa_correta:
-            print('VOCE PERDEU :/')
-            controle = 'perdeu'
-            break
-        j += 1
-        id += 1
+for nivel, lista_pergunta in dic_questoes.items():
+    i = 0 
+    while i < 9:
+        Pergunta = sorteia_questao_inedida(dic_questoes,niveis[n//3], sort)
+        pergunta_texto = questao_para_texto(Pergunta, id)
+        print(niveis[n//3])
         n += 1
+        i += 1
 
-# DIFICEIS 
-if controle == 'acertou':
-    k = 0 
-    while k < 3: 
-        pergunta = sorteia_questao_inedida(quest, niveis[n//3], sort)
-        pergunta_texto = questao_para_texto(pergunta,id)
-        print(pergunta_texto)
-        resposta = str(input('Digite sua resposta: '))
-        for g in quest:
-            if g == pergunta:
-                alternativa_correta = g['correta']
-        if resposta == 'pula':
-            if pula > 0:
-                i += 1
-            else:
-                print('SEM PULOS RESTANTES')
-                resposta = str(input('Digite sua resposta: '))
-        if resposta == 'ajuda':
-            if ajuda > 0:
-                print(gera_ajuda(pergunta))
-                resposta = str(input('Digite sua resposta: '))
-                ajuda -=1
-            else:
-                print('SEM AJUDAS RESTANTES')
-                resposta = str(input('Digite sua resposta: '))
-        if resposta == alternativa_correta:
-            print('RESPOSTA CORRETA!')
-        if resposta in ('A', 'B', 'C', 'D') and resposta != alternativa_correta:
-            print('VOCE PERDEU :/')
-            break
-        k += 1
-        id += 1
-        n += 1
+
+
+
 
 
 
