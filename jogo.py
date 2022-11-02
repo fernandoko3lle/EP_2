@@ -198,10 +198,33 @@ B: {3}
 C: {4}
 D: {5}
 '''.format(id,dic_questao['titulo'],dic_questao['opcoes']['A'],dic_questao['opcoes']['B'], dic_questao['opcoes']['C'], dic_questao['opcoes']['D'])
+def gera_ajuda(questao):
+    l_respostas_erradas = []
+    dica = []
+    correta = questao['correta']
+    dic_questoes = questao['opcoes']
+    for r in dic_questoes.values():
+        if r != dic_questoes[correta]:
+            l_respostas_erradas.append(r)
+    contagem = random.choice(range(2))
+    contagem = contagem+1
+    for a in range(contagem):
+        dica.append(random.choice(l_respostas_erradas))
+    if len(dica) == 2:
+        if dica[0] == dica[1]:
+            del dica[1]
+    if len(dica) == 2:        
+        x = 'DICA:\nOpções certamente erradas: {0} | {1}'.format(dica[0], dica[1])
+    else:
+        x = 'DICA:\nOpções certamente erradas: {0}'.format(dica[0])
+
+    return x 
 
 # CONTADORES 
 id = 1
 n = 0 
+ajuda = 3
+pula = 2
 
 # INTRODUÇÃO
 nome = input('''Bem vindo ao Fortuna DesSoft,
@@ -229,10 +252,106 @@ while i < 3:
     print(pergunta_texto)
     resposta = str(input('Digite sua resposta: '))
     for g in quest:
-        alternativa_correta = g['correta']
-        print(alternativa_correta)
+        if g == pergunta:
+            alternativa_correta = g['correta']
+    if resposta == 'pula':
+        if pula > 0:
+            print('pulado')
+        else:
+            print('SEM PULOS RESTANTES')
+            resposta = str(input('Digite sua resposta: '))
+    if resposta == 'ajuda':
+        if ajuda > 0:
+            print(gera_ajuda(pergunta))
+            resposta = str(input('Digite sua resposta: '))
+            ajuda -=1
+        else:
+            print('SEM AJUDAS RESTANTES')
+            resposta = str(input('Digite sua resposta: '))
+    if resposta == alternativa_correta:
+        print('RESPOSTA CORRETA!')
+        controle = 'acertou'
+    if resposta in ('A', 'B', 'C', 'D') and resposta != alternativa_correta:
+        print('VOCE PERDEU :/')
+        controle = 'perdeu'
         break
     i += 1
     id += 1
+    n += 1
 
-#resposta_usuario = input('digite a alternativa correta:')
+# MEDIAS     
+if controle == 'acertou':
+    j = 0 
+    while j < 3: 
+        pergunta = sorteia_questao_inedida(quest, niveis[n//3], sort)
+        pergunta_texto = questao_para_texto(pergunta,id)
+        print(pergunta_texto)
+        resposta = str(input('Digite sua resposta: '))
+        for g in quest:
+            if g == pergunta:
+                alternativa_correta = g['correta']
+        if resposta == 'pula':
+            if pula > 0:
+                i += 1
+            else:
+                print('SEM PULOS RESTANTES')
+                resposta = str(input('Digite sua resposta: '))
+        if resposta == 'ajuda':
+            if ajuda > 0:
+                print(gera_ajuda(pergunta))
+                resposta = str(input('Digite sua resposta: '))
+                ajuda -=1
+            else:
+                print('SEM AJUDAS RESTANTES')
+                resposta = str(input('Digite sua resposta: '))
+        if resposta == alternativa_correta:
+            print('RESPOSTA CORRETA!')
+            controle = 'acertou'
+        if resposta in ('A', 'B', 'C', 'D') and resposta != alternativa_correta:
+            print('VOCE PERDEU :/')
+            controle = 'perdeu'
+            break
+        j += 1
+        id += 1
+        n += 1
+
+# DIFICEIS 
+if controle == 'acertou':
+    k = 0 
+    while k < 3: 
+        pergunta = sorteia_questao_inedida(quest, niveis[n//3], sort)
+        pergunta_texto = questao_para_texto(pergunta,id)
+        print(pergunta_texto)
+        resposta = str(input('Digite sua resposta: '))
+        for g in quest:
+            if g == pergunta:
+                alternativa_correta = g['correta']
+        if resposta == 'pula':
+            if pula > 0:
+                i += 1
+            else:
+                print('SEM PULOS RESTANTES')
+                resposta = str(input('Digite sua resposta: '))
+        if resposta == 'ajuda':
+            if ajuda > 0:
+                print(gera_ajuda(pergunta))
+                resposta = str(input('Digite sua resposta: '))
+                ajuda -=1
+            else:
+                print('SEM AJUDAS RESTANTES')
+                resposta = str(input('Digite sua resposta: '))
+        if resposta == alternativa_correta:
+            print('RESPOSTA CORRETA!')
+        if resposta in ('A', 'B', 'C', 'D') and resposta != alternativa_correta:
+            print('VOCE PERDEU :/')
+            break
+        k += 1
+        id += 1
+        n += 1
+
+
+
+
+
+
+
