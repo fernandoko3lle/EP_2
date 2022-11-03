@@ -310,6 +310,10 @@ for nivel, lista_pergunta in dic_questoes.items():
         print(niveis[n//3])
         n += 1
         i += 1
+        print(pergunta_texto)
+        resposta = str(input('DIGITE SUA RESPOSTA: '))
+        
+
 
 
 
