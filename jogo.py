@@ -308,9 +308,32 @@ for nivel, lista_pergunta in dic_questoes.items():
     i = 0 
     while i < 9:
         Pergunta = sorteia_questao_inedida(dic_questoes,niveis[n//3], sort)
+        correta = Pergunta['correta']
         pergunta_texto = questao_para_texto(Pergunta, id)
         print(pergunta_texto)
         resposta = str(input('DIGITE SUA RESPOSTA: '))
+        if resposta == 'ajuda':
+            if ajuda > 0:
+                print(gera_ajuda(Pergunta))
+                resposta = str(input('DIGITE SUA RESPOSTA: '))
+                ajuda -= 1
+            else:
+                print('VOCE NÃO TEM MAIS AJUDA')
+                resposta = str(input('DIGITE SUA RESPOSTA: '))
+        if resposta == 'pula':
+            if pula > 0:
+                i += 1
+                pula -= 1
+            else:
+                print('VOCE NÃO TEM MAIS PULOS')
+                resposta = str(input('DIGITE SUA RESPOSTA: '))
+        if resposta == correta:
+            print('ACERTOU!!')
+        if resposta in ('A', 'B', 'C', 'D') and resposta != correta:
+            print('VOCE PERDEU =/')
+            i += 9999
+
+        
         id += 1
         n += 1
         i += 1
