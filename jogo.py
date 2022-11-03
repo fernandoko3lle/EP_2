@@ -166,12 +166,14 @@ quest = [{'titulo': 'Qual o resultado da operação 57 + 32?',
 #VARIAVEIS GLOBAIS
 sort = []
 
-# NIVEIS   
+# NIVEIS
 niveis = {
-    0: "facil",
-    1: "médio",
-    2: "dicícil",
+    0: 'facil',
+    1: 'medio',
+    2: 'dificil'
 }
+           
+
 
 # FUNÇÕES 
 def sorteia_questao(dic_questoes, nivel):
@@ -307,11 +309,12 @@ for nivel, lista_pergunta in dic_questoes.items():
     while i < 9:
         Pergunta = sorteia_questao_inedida(dic_questoes,niveis[n//3], sort)
         pergunta_texto = questao_para_texto(Pergunta, id)
-        print(niveis[n//3])
-        n += 1
-        i += 1
         print(pergunta_texto)
         resposta = str(input('DIGITE SUA RESPOSTA: '))
+        id += 1
+        n += 1
+        i += 1
+    break
         
 
 
