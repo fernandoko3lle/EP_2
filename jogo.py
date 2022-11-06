@@ -267,6 +267,13 @@ def transforma_base(lista):
                 else:
                     dic_nivel[valor] = [Q]
     return dic_nivel
+def lista_dic_vaz(n):
+    j = 0
+    lista_dic_emp = []
+    while j < n:
+        lista_dic_emp.append({})
+        j += 1
+    return lista_dic_emp
 
 # CONTADORES 
 id = 0
@@ -276,8 +283,8 @@ pula = 2
 
 # VALIDANDO LISTA DE QUESTÕES  
 valida = valida_questoes(quest)
-    #deve retornar uma lista com dicionarios vazios. 
-lista_dic_emp = ['{}, ' * (len(quest) - 1) + '{}']
+nova_lista = lista_dic_vaz(len(quest))
+
 
 
 # TRANSFORMANDO LISTA DE QUESTÕES EM UM DICIONARIO COM SEPARAÇÃO POR NIVEL 
@@ -303,41 +310,41 @@ BOA SORTE, QUE A FORTUNA ESTEJA COM VOCE
 '''.format(nome))
 
 # SORTEANDO UMA QUESTÃO
-
-for nivel, lista_pergunta in dic_questoes.items():
-    i = 0 
-    while i < 9:
-        id += 1
-        Pergunta = sorteia_questao_inedida(dic_questoes,niveis[n//3], sort)
-        correta = Pergunta['correta']
-        pergunta_texto = questao_para_texto(Pergunta, id)
-        print(pergunta_texto)
-        resposta = str(input('DIGITE SUA RESPOSTA: '))
-        if resposta == 'ajuda':
-            if ajuda > 0:
-                print(gera_ajuda(Pergunta))
-                resposta = str(input('DIGITE SUA NOVA RESPOSTA: '))    
-                ajuda -= 1
-            else:
-                print('VOCE NÃO TEM MAIS AJUDAS')
-                resposta = str(input('DIGITE SUA NOVA RESPOSTA: ')) 
-                True
-        if resposta == 'pula':
-            if pula > 0:
-                i += 1
-                pula -= 1
-                True
-            else:
-                print('VOCE NÃO TEM MAIS PULOS')
-                True
-        if resposta == correta:
-            print('ACERTOU!!')
-        if resposta in ('A', 'B', 'C', 'D') and resposta != correta:
-            print('VOCE PERDEU =/')
-            i += 9999
-        n += 1
-        i += 1
-    break
+if valida == nova_lista:
+    for nivel, lista_pergunta in dic_questoes.items():
+        i = 0 
+        while i < 9:
+            id += 1
+            Pergunta = sorteia_questao_inedida(dic_questoes,niveis[n//3], sort)
+            correta = Pergunta['correta']
+            pergunta_texto = questao_para_texto(Pergunta, id)
+            print(pergunta_texto)
+            resposta = str(input('DIGITE SUA RESPOSTA: '))
+            if resposta == 'ajuda':
+                if ajuda > 0:
+                    print(gera_ajuda(Pergunta))
+                    resposta = str(input('DIGITE SUA NOVA RESPOSTA: '))    
+                    ajuda -= 1
+                else:
+                    print('VOCE NÃO TEM MAIS AJUDAS')
+                    resposta = str(input('DIGITE SUA NOVA RESPOSTA: ')) 
+                    True
+            if resposta == 'pula':
+                if pula > 0:
+                    i += 1
+                    pula -= 1
+                    True
+                else:
+                    print('VOCE NÃO TEM MAIS PULOS')
+                    True
+            if resposta == correta:
+                print('ACERTOU!!')
+            if resposta in ('A', 'B', 'C', 'D') and resposta != correta:
+                print('VOCE PERDEU =/')
+                i += 9999
+            n += 1
+            i += 1
+        break
         
 
 
