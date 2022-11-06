@@ -269,7 +269,7 @@ def transforma_base(lista):
     return dic_nivel
 
 # CONTADORES 
-id = 1
+id = 0
 n = 0 
 ajuda = 3
 pula = 2
@@ -307,6 +307,7 @@ BOA SORTE, QUE A FORTUNA ESTEJA COM VOCE
 for nivel, lista_pergunta in dic_questoes.items():
     i = 0 
     while i < 9:
+        id += 1
         Pergunta = sorteia_questao_inedida(dic_questoes,niveis[n//3], sort)
         correta = Pergunta['correta']
         pergunta_texto = questao_para_texto(Pergunta, id)
@@ -315,26 +316,25 @@ for nivel, lista_pergunta in dic_questoes.items():
         if resposta == 'ajuda':
             if ajuda > 0:
                 print(gera_ajuda(Pergunta))
-                resposta = str(input('DIGITE SUA RESPOSTA: '))
+                resposta = str(input('DIGITE SUA NOVA RESPOSTA: '))    
                 ajuda -= 1
             else:
-                print('VOCE NÃO TEM MAIS AJUDA')
-                resposta = str(input('DIGITE SUA RESPOSTA: '))
+                print('VOCE NÃO TEM MAIS AJUDAS')
+                resposta = str(input('DIGITE SUA NOVA RESPOSTA: ')) 
+                True
         if resposta == 'pula':
             if pula > 0:
                 i += 1
                 pula -= 1
+                True
             else:
                 print('VOCE NÃO TEM MAIS PULOS')
-                resposta = str(input('DIGITE SUA RESPOSTA: '))
+                True
         if resposta == correta:
             print('ACERTOU!!')
         if resposta in ('A', 'B', 'C', 'D') and resposta != correta:
             print('VOCE PERDEU =/')
             i += 9999
-
-        
-        id += 1
         n += 1
         i += 1
     break
