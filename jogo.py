@@ -1,5 +1,6 @@
 # IMPORTAÇÕES
 import random
+from termcolor import *
  
 # LIB QUEST
 quest = [{'titulo': 'Qual o resultado da operação 57 + 32?',
@@ -306,19 +307,11 @@ dic_questoes = transforma_base(quest)
 
 
 # INTRODUÇÃO
-nome = input('''Bem vindo ao Fortuna DesSoft,
-Digite seu nome para começar: ''')
-print('''
-Ok {0}, você tem direito a pular 3 vezes e 2 ajudas!
-
-CUIDADO basta uma resposta incorreta para perder tudo.
-
-Durante o jogo você terá direito de pular 2 perguntas e solicitar 3 ajudas para os universitários.
-Para pular ou pedir ajuda digite: 'pula' ou 'ajuda'
-Você pode parar a qualquer momento do jogo, para isso digite: 'parar' 
-
-BOA SORTE, QUE A FORTUNA ESTEJA COM VOCE
-'''.format(nome))
+cprint('Olá! Você está na fortuna DesSoft e terá a oportunidade de enriquecer!', 'magenta')
+nome = input('\nQual seu nome? ')
+print('''\nOk {0}, você tem direito a pular 3 vezes e 2 ajudas!'''.format(nome))
+cprint('''As opções de respostas são 'A', 'B', 'C', 'D', 'ajuda', 'pula' e 'parar'!
+''', 'cyan')
 
 #Codigo principal 
 if valida == nova_lista:
