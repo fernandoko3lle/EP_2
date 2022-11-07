@@ -172,7 +172,9 @@ niveis = {
     1: 'medio',
     2: 'dificil'
 }
-           
+
+#Premio
+dic_premio = {1000,5000,10000,30000,50000,100000,300000,500000,1000000}        
 
 
 # FUNÇÕES 
@@ -279,7 +281,7 @@ def lista_dic_vaz(n):
 id = 0
 n = 0 
 ajuda = 3
-pula = 2
+pula = 20
 
 # VALIDANDO LISTA DE QUESTÕES  
 valida = valida_questoes(quest)
