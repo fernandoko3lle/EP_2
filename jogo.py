@@ -1,6 +1,6 @@
 # IMPORTAÇÕES
 import random
-
+ 
 # LIB QUEST
 quest = [{'titulo': 'Qual o resultado da operação 57 + 32?',
           'nivel': 'facil',
@@ -309,9 +309,7 @@ dic_questoes = transforma_base(quest)
 nome = input('''Bem vindo ao Fortuna DesSoft,
 Digite seu nome para começar: ''')
 print('''
-Olá {0}, pronto para ser o mais novo milinonário?
-No Fortuna você terá que responder perguntas de multiplas escolha podendo ganhar até 1 milhão de reais!!!!
-Cada resposta correta aumentará seu premio!!!
+Ok {0}, você tem direito a pular 3 vezes e 2 ajudas!
 
 CUIDADO basta uma resposta incorreta para perder tudo.
 
@@ -322,7 +320,7 @@ Você pode parar a qualquer momento do jogo, para isso digite: 'parar'
 BOA SORTE, QUE A FORTUNA ESTEJA COM VOCE
 '''.format(nome))
 
-# SORTEANDO UMA QUESTÃO
+#Codigo principal 
 if valida == nova_lista:
     for nivel, lista_pergunta in dic_questoes.items():
         i = 0 
