@@ -1,6 +1,6 @@
 # IMPORTAÇÕES
 import random
- 
+
 # LIB QUEST
 quest = [{'titulo': 'Qual o resultado da operação 57 + 32?',
           'nivel': 'facil',
@@ -192,13 +192,10 @@ dic_premio = {
 def sorteia_questao(dic_questoes, nivel):
     return random.choice(dic_questoes[nivel])
 def sorteia_questao_inedida(dic_questoes, nivel, sort): 
-    c = 0 
-    for q, r in dic_questoes.items():
-        if q == nivel:
-            if r[c] not in sort:
-                q_sort = sorteia_questao(dic_questoes, nivel)
-                sort.append(q_sort)
-            c += 1
+    q_sort = sorteia_questao(dic_questoes, nivel)
+    while q_sort in sort:
+        q_sort = sorteia_questao(dic_questoes, nivel)
+    sort.append(q_sort)
     return q_sort
 def questao_para_texto(dic_questao, id):
   return ''' ----------------------------------------
@@ -339,22 +336,23 @@ if valida == nova_lista:
                 else:
                     print('VOCE NÃO TEM MAIS AJUDAS')
                     resposta = str(input('DIGITE SUA NOVA RESPOSTA: ')) 
-                    True
+                    continue
             if resposta == 'pula':
                 if pula > 0:
                     i += 1
                     pula -= 1
-                    True
+                    continue
                 else:
                     print('VOCE NÃO TEM MAIS PULOS')
-                    True
+                    continue
             if resposta == correta:
                 print('ACERTOU!!')
+                i += 1
             if resposta in ('A', 'B', 'C', 'D') and resposta != correta:
                 print('VOCE PERDEU =/')
                 i += 9999
             n += 1
-            i += 1
+    
         break
 else:
     print('Erro na lista de questoes')
