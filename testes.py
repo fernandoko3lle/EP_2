@@ -1,3 +1,7 @@
+# IMPORTAÇÕES
+import random
+
+# LIB QUEST
 quest = [{'titulo': 'Qual o resultado da operação 57 + 32?',
           'nivel': 'facil',
           'opcoes': {'A': '-19', 'B': '85', 'C': '89', 'D': '99'},
@@ -20,7 +24,7 @@ quest = [{'titulo': 'Qual o resultado da operação 57 + 32?',
 
          {'titulo': 'Qual destes termos menos tem relação com o fenômeno da globalização?',
           'nivel': 'facil',
-          'opcoes': {'A': 'Aculturação', 'B': 'Neoliberalismo', 'C': 'União Europeia', 'D': 'Caldeirão do Huck'},
+          'opcoes': {'A': 'Aculturação'},
           'correta': 'D'},
 
          {'titulo': 'Qual o feriado do aniversário da cidade de São Paulo?',
@@ -158,6 +162,66 @@ quest = [{'titulo': 'Qual o resultado da operação 57 + 32?',
           'opcoes': {'A': 'Uma banda de Rock', 'B': 'Uma marca de luxo', 'C': 'Cidade Francesa', 'D': 'Morte de tecido orgânico'},
           'correta': 'D'}
         ]
+
+#VARIAVEIS GLOBAIS
+sort = []
+
+# NIVEIS
+niveis = {
+    0: 'facil',
+    1: 'medio',
+    2: 'dificil'
+}
+
+#Premio
+dic_premio = {1000,5000,10000,30000,50000,100000,300000,500000,1000000}        
+
+
+# FUNÇÕES 
+def sorteia_questao(dic_questoes, nivel):
+    return random.choice(dic_questoes[nivel])
+def sorteia_questao_inedida(dic_questoes, nivel, sort): 
+    c = 0 
+    for q, r in dic_questoes.items():
+        if q == nivel:
+            if r[c] not in sort:
+                q_sort = sorteia_questao(dic_questoes, nivel)
+                sort.append(q_sort)
+            c += 1
+    return q_sort
+def questao_para_texto(dic_questao, id):
+  return ''' ----------------------------------------
+QUESTAO {0}
+
+{1}
+
+ALTERNATIVAS:
+A: {2}
+B: {3}
+C: {4}
+D: {5}
+'''.format(id,dic_questao['titulo'],dic_questao['opcoes']['A'],dic_questao['opcoes']['B'], dic_questao['opcoes']['C'], dic_questao['opcoes']['D'])
+def gera_ajuda(questao):
+    l_respostas_erradas = []
+    dica = []
+    correta = questao['correta']
+    dic_questoes = questao['opcoes']
+    for r in dic_questoes.values():
+        if r != dic_questoes[correta]:
+            l_respostas_erradas.append(r)
+    contagem = random.choice(range(2))
+    contagem = contagem+1
+    for a in range(contagem):
+        dica.append(random.choice(l_respostas_erradas))
+    if len(dica) == 2:
+        if dica[0] == dica[1]:
+            del dica[1]
+    if len(dica) == 2:        
+        x = 'DICA:\nOpções certamente erradas: {0} | {1}'.format(dica[0], dica[1])
+    else:
+        x = 'DICA:\nOpções certamente erradas: {0}'.format(dica[0])
+
+    return x 
 def valida_questao(Questão): 
     Validação = {}
     for chave in ('titulo', 'nivel', 'opcoes', 'correta'):
@@ -195,6 +259,16 @@ def valida_questoes(questoes):
         val = valida_questao(i)
         lista_validada.append(val)
     return lista_validada
+def transforma_base(lista):
+    dic_nivel = {}
+    for Q in lista:
+        for chave, valor in Q.items():
+            if chave == 'nivel':
+                if valor in dic_nivel:
+                    dic_nivel[valor].append(Q)
+                else:
+                    dic_nivel[valor] = [Q]
+    return dic_nivel
 def lista_dic_vaz(n):
     j = 0
     lista_dic_emp = []
@@ -203,18 +277,73 @@ def lista_dic_vaz(n):
         j += 1
     return lista_dic_emp
 
+# CONTADORES 
+id = 0
+n = 0 
+ajuda = 3
+pula = 20
 
+# VALIDANDO LISTA DE QUESTÕES  
 valida = valida_questoes(quest)
-print(valida)
 nova_lista = lista_dic_vaz(len(quest))
-print(nova_lista)
 
 
 
+# TRANSFORMANDO LISTA DE QUESTÕES EM UM DICIONARIO COM SEPARAÇÃO POR NIVEL 
+dic_questoes = transforma_base(quest)
 
 
-# lista_dic_emp = ['{}, ' * (len(quest) - 1) + '{}']
-# print(lista_dic_emp)
 
-# teste = [{},  * 2]
-# print(teste)
+# INTRODUÇÃO
+nome = input('''Bem vindo ao Fortuna DesSoft,
+Digite seu nome para começar: ''')
+print('''
+Olá {0}, pronto para ser o mais novo milinonário?
+No Fortuna você terá que responder perguntas de multiplas escolha podendo ganhar até 1 milhão de reais!!!!
+Cada resposta correta aumentará seu premio!!!
+
+CUIDADO basta uma resposta incorreta para perder tudo.
+
+Durante o jogo você terá direito de pular 2 perguntas e solicitar 3 ajudas para os universitários.
+Para pular ou pedir ajuda digite: 'pula' ou 'ajuda'
+Você pode parar a qualquer momento do jogo, para isso digite: 'parar' 
+
+BOA SORTE, QUE A FORTUNA ESTEJA COM VOCE
+'''.format(nome))
+
+# SORTEANDO UMA QUESTÃO
+if valida == nova_lista:
+    for nivel, lista_pergunta in dic_questoes.items():
+        i = 0 
+        while i < 9:
+            id += 1
+            Pergunta = sorteia_questao_inedida(dic_questoes,niveis[n//3], sort)
+            correta = Pergunta['correta']
+            pergunta_texto = questao_para_texto(Pergunta, id)
+            print(pergunta_texto)
+            resposta = str(input('DIGITE SUA RESPOSTA: '))
+            if resposta == 'ajuda':
+                if ajuda > 0:
+                    print(gera_ajuda(Pergunta))
+                    resposta = str(input('DIGITE SUA NOVA RESPOSTA: '))    
+                    ajuda -= 1
+                else:
+                    print('VOCE NÃO TEM MAIS AJUDAS')
+                    resposta = str(input('DIGITE SUA NOVA RESPOSTA: ')) 
+                    True
+            if resposta == 'pula':
+                if pula > 0:
+                    i += 1
+                    pula -= 1
+                    True
+                else:
+                    print('VOCE NÃO TEM MAIS PULOS')
+                    True
+            if resposta == correta:
+                print('ACERTOU!!')
+            if resposta in ('A', 'B', 'C', 'D') and resposta != correta:
+                print('VOCE PERDEU =/')
+                i += 9999
+            n += 1
+            i += 1
+        break
