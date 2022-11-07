@@ -326,6 +326,7 @@ if valida == nova_lista:
                     print(gera_ajuda(Pergunta))
                     resposta = str(input('DIGITE SUA NOVA RESPOSTA: '))    
                     ajuda -= 1
+                    continue
                 else:
                     print('VOCE NÃO TEM MAIS AJUDAS')
                     resposta = str(input('DIGITE SUA NOVA RESPOSTA: ')) 
@@ -336,25 +337,25 @@ if valida == nova_lista:
                     pula -= 1
                     continue
                 else:
-                    print('VOCE NÃO TEM MAIS PULOS')
+                    print('Você não tem mais pulos')
                     continue
             if resposta == correta:
                 print('ACERTOU!!')
                 i += 1
-            if resposta in ('A', 'B', 'C', 'D') and resposta != correta:
-                print('VOCE PERDEU =/')
+            if resposta != correta and resposta in ('A', 'B', 'C', 'D'):
+                cprint('Que pena! Você errou e vai sair sem nada :(', 'yellow')
                 i += 9999
+            else:
+                cprint('Opção invalida!', 'red')
+                cprint('''As opções de respostas são 'A', 'B', 'C', 'D', 'ajuda', 'pula' e 'parar'!
+
+''', 'cyan')
+                continue
             n += 1
-    
         break
 else:
     print('Erro na lista de questoes')
     print(valida)
-
-
-#   
-#   
-#   
 
 
 
