@@ -1,5 +1,6 @@
 # IMPORTAÇÕES
 import random
+from termcolor import *
 
 # LIB QUEST
 quest = [{'titulo': 'Qual o resultado da operação 57 + 32?',
@@ -24,7 +25,7 @@ quest = [{'titulo': 'Qual o resultado da operação 57 + 32?',
 
          {'titulo': 'Qual destes termos menos tem relação com o fenômeno da globalização?',
           'nivel': 'facil',
-          'opcoes': {'A': 'Aculturação'},
+          'opcoes': {'A': 'Aculturação', 'B': 'Neoliberalismo', 'C': 'União Europeia', 'D': 'Caldeirão do Huck'},
           'correta': 'D'},
 
          {'titulo': 'Qual o feriado do aniversário da cidade de São Paulo?',
@@ -174,8 +175,21 @@ niveis = {
 }
 
 #Premio
-dic_premio = {1000,5000,10000,30000,50000,100000,300000,500000,1000000}        
+Premio = 0
+dic_premio = {
+    1: 1000,
+    2: 5000,
+    3: 10000,
+    4: 30000,
+    5: 50000,
+    6: 100000,
+    7: 300000,
+    8: 500000,
+    9: 1000000,
+}        
 
+
+cprint('ola','red')
 
 # FUNÇÕES 
 def sorteia_questao(dic_questoes, nivel):
@@ -293,7 +307,6 @@ nova_lista = lista_dic_vaz(len(quest))
 dic_questoes = transforma_base(quest)
 
 
-
 # INTRODUÇÃO
 nome = input('''Bem vindo ao Fortuna DesSoft,
 Digite seu nome para começar: ''')
@@ -347,3 +360,6 @@ if valida == nova_lista:
             n += 1
             i += 1
         break
+else:
+    print('Erro na lista de questoes')
+    print(valida)
