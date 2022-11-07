@@ -347,8 +347,9 @@ if valida == nova_lista:
             n += 1
             i += 1
         break
-        
-
+else:
+    print('Erro na lista de questoes')
+    print(valida)
 
 
 
