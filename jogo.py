@@ -376,7 +376,7 @@ if valida == nova_lista:
 #Codigo principal - MEDIAS
         if para == 0:
             if sai_sem_nada == 0:
-                print('Boa! Você passou para o níel médio')
+                cprint('HEY! Você passou para o nível MEDIO!',attrs=['bold'])
             erro = False
             while i < 6:
                 if erro == False:
@@ -494,6 +494,7 @@ else:
 
 # perguntas estão repetidas e não estão de acordo com sua dificuldade
 # arrumar função parar 
+# quando erra perguntar se deseja continuar ou parar
 
 
 
