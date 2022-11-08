@@ -339,7 +339,7 @@ if valida == nova_lista:
                     print('VOCE NÃO TEM MAIS AJUDAS')
                     resposta = str(input('DIGITE SUA NOVA RESPOSTA: ')) 
                     continue
-            elif resposta == 'pula':
+            if resposta == 'pula':
                 if pula > 0:
                     i += 1
                     pula -= 1
@@ -348,17 +348,17 @@ if valida == nova_lista:
                     print('Voce não tem mais pulos')
                     resposta = str(input('DIGITE SUA NOVA RESPOSTA: '))
                     continue
-            elif resposta == 'parar':
+            if resposta == 'parar':
                 break
-            elif resposta == correta:
+            if resposta == correta:
                 Premio += dic_premio[id]
                 cprint('Você acertou! Seu prêmio atual é de R$ {}.00'.format(Premio), 'green',attrs=['bold'])
                 i += 1
-            elif resposta != correta and resposta in ('A', 'B', 'C', 'D'):
+            if resposta != correta and resposta in ('A', 'B', 'C', 'D'):
                 cprint('Que pena! Você errou e vai sair sem nada :(', 'yellow',attrs=['bold'])
                 i += 9999
                 sai_sem_nada = 1
-            else:
+            if resposta not in ('A', 'B', 'C', 'D', 'ajuda', 'pula', 'parar'):
                 cprint('Opção invalida!', 'red')
                 cprint('''As opções de respostas são 'A', 'B', 'C', 'D', 'ajuda', 'pula' e 'parar'!
 ''', 'cyan')
@@ -387,7 +387,7 @@ if valida == nova_lista:
                     print('VOCE NÃO TEM MAIS AJUDAS')
                     resposta = str(input('DIGITE SUA NOVA RESPOSTA: ')) 
                     continue
-            elif resposta == 'pula':
+            if resposta == 'pula':
                 if pula > 0:
                     i += 1
                     pula -= 1
@@ -396,17 +396,17 @@ if valida == nova_lista:
                     print('Voce não tem mais pulos')
                     resposta = str(input('DIGITE SUA NOVA RESPOSTA: '))
                     continue
-            elif resposta == 'parar':
+            if resposta == 'parar':
                 break
-            elif resposta == correta:
+            if resposta == correta:
                 Premio += dic_premio[id]
                 cprint('Você acertou! Seu prêmio atual é de R$ {},00'.format(Premio), 'green')
                 i += 1
-            elif resposta != correta and resposta in ('A', 'B', 'C', 'D'):
+            if resposta != correta and resposta in ('A', 'B', 'C', 'D'):
                 cprint('Que pena! Você errou e vai sair sem nada :(', 'yellow')
                 i += 9999
                 sai_sem_nada = 1
-            else:
+            if resposta not in ('A', 'B', 'C', 'D', 'ajuda', 'pula', 'parar'):
                 cprint('Opção invalida!', 'red')
                 cprint('''As opções de respostas são 'A', 'B', 'C', 'D', 'ajuda', 'pula' e 'parar'!
 ''', 'cyan')
@@ -434,7 +434,7 @@ if valida == nova_lista:
                     print('VOCE NÃO TEM MAIS AJUDAS')
                     resposta = str(input('DIGITE SUA NOVA RESPOSTA: ')) 
                     continue
-            elif resposta == 'pula':
+            if resposta == 'pula':
                 if pula > 0:
                     i += 1
                     pula -= 1
@@ -443,17 +443,17 @@ if valida == nova_lista:
                     print('Voce não tem mais pulos')
                     resposta = str(input('DIGITE SUA NOVA RESPOSTA: '))
                     continue
-            elif resposta == 'parar':
+            if resposta == 'parar':
                 break
-            elif resposta == correta:
+            if resposta == correta:
                 Premio += dic_premio[id]
                 cprint('Você acertou! Seu prêmio atual é de R$ {},00'.format(Premio), 'green')
                 i += 1
-            elif resposta != correta and resposta in ('A', 'B', 'C', 'D'):
+            if resposta != correta and resposta in ('A', 'B', 'C', 'D'):
                 cprint('Que pena! Você errou e vai sair sem nada :(', 'yellow')
                 i += 9999
                 sai_sem_nada = 1
-            else:
+            if resposta not in ('A', 'B', 'C', 'D', 'ajuda', 'pula', 'parar'):
                 cprint('Opção invalida!', 'red')
                 cprint('''As opções de respostas são 'A', 'B', 'C', 'D', 'ajuda', 'pula' e 'parar'!
 ''', 'cyan')
