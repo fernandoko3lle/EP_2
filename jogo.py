@@ -355,7 +355,7 @@ if valida == nova_lista:
                     id += 1
                     continue
             if resposta == 'parar':
-                para =1
+                para += 1
                 break
             if resposta == correta:
                 Premio += dic_premio[id]
