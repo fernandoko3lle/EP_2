@@ -200,12 +200,14 @@ def sorteia_questao_inedida(dic_questoes, nivel, sort):
     sort.append(q_sort)
     return q_sort
 def questao_para_texto(dic_questao, id):
-  return ''' ----------------------------------------
+  return '''
+
+----------------------------------------
 QUESTAO {0}
 
 {1}
 
-ALTERNATIVAS:
+RESPOSTAS:
 A: {2}
 B: {3}
 C: {4}
@@ -303,16 +305,16 @@ dic_questoes = transforma_base(quest)
 
 
 # INTRODUÇÃO
-cprint('Olá! Você está na fortuna DesSoft e terá a oportunidade de enriquecer!', 'magenta')
+cprint('\nOlá! Você está na fortuna DesSoft e terá a oportunidade de enriquecer!', 'magenta',attrs=['bold'])
 nome = input('\nQual seu nome? ')
-print('''\nOk {0}, você tem direito a pular 3 vezes e 2 ajudas!'''.format(nome))
+cprint('''\nOk {0}, você tem direito a pular 3 vezes e 2 ajudas!'''.format(nome),attrs=['bold'])
 cprint('''As opções de respostas são 'A', 'B', 'C', 'D', 'ajuda', 'pula' e 'parar'!
-''', 'cyan')
+''', 'cyan',attrs=['bold'])
 comeco = input('\nAperte ENTER para continuar...')
 
 #Codigo principal - FACEIS
-print('O jogo já vai começar! Lá vem a primeira questão!')
-print('\nVamos começar com as perguntas FACEIS')
+print('\nO jogo já vai começar! Lá vem a primeira questão!')
+print('\nVamos começar com questões do nível FACIL!')
 while comeco != '':
     comeco = input('Aperte ENTER para continuar...')
 if valida == nova_lista:
@@ -327,7 +329,7 @@ if valida == nova_lista:
             correta = Pergunta['correta']
             pergunta_texto = questao_para_texto(Pergunta, id)
             print(pergunta_texto)
-            resposta = str(input('DIGITE SUA RESPOSTA: '))
+            resposta = str(input('Qual sua resposta?! '))
             if resposta == 'ajuda':
                 if ajuda > 0:
                     print(gera_ajuda(Pergunta))
@@ -350,10 +352,10 @@ if valida == nova_lista:
                 break
             elif resposta == correta:
                 Premio += dic_premio[id]
-                cprint('Você acertou! Seu prêmio atual é de R$ {},00'.format(Premio), 'green')
+                cprint('Você acertou! Seu prêmio atual é de R$ {}.00'.format(Premio), 'green',attrs=['bold'])
                 i += 1
             elif resposta != correta and resposta in ('A', 'B', 'C', 'D'):
-                cprint('Que pena! Você errou e vai sair sem nada :(', 'yellow')
+                cprint('Que pena! Você errou e vai sair sem nada :(', 'yellow',attrs=['bold'])
                 i += 9999
                 sai_sem_nada = 1
             else:
