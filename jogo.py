@@ -167,6 +167,7 @@ quest = [{'titulo': 'Qual o resultado da operação 57 + 32?',
 #VARIAVEIS GLOBAIS
 sort = []
 sai_sem_nada = 0
+para = 0
 
 # NIVEIS
 niveis = {
@@ -354,6 +355,7 @@ if valida == nova_lista:
                     id += 1
                     continue
             if resposta == 'parar':
+                para =1
                 break
             if resposta == correta:
                 Premio += dic_premio[id]
@@ -372,113 +374,116 @@ if valida == nova_lista:
             n += 1
 
 #Codigo principal - MEDIAS
-        if sai_sem_nada == 0:
-            print('Boa! Você passou para o níel médio')
-        erro = False
-        while i < 6:
-            if erro == False:
-                comeco = input('Aperte ENTER para continuar...')
-                while comeco != '':
+        if para == 0:
+            if sai_sem_nada == 0:
+                print('Boa! Você passou para o níel médio')
+            erro = False
+            while i < 6:
+                if erro == False:
                     comeco = input('Aperte ENTER para continuar...')
-                id += 1
-                Pergunta = sorteia_questao_inedida(dic_questoes,niveis[n//3], sort)
-                correta = Pergunta['correta']
-                pergunta_texto = questao_para_texto(Pergunta, id)
-                print(pergunta_texto)
-            erro == False
-            resposta = str(input('DIGITE SUA RESPOSTA: '))
-            if resposta == 'ajuda':
-                if ajuda > 0:
-                    print(gera_ajuda(Pergunta))
-                    resposta = str(input('DIGITE SUA NOVA RESPOSTA: '))    
-                    ajuda -= 1
-                else:
-                    print('VOCE NÃO TEM MAIS AJUDAS') 
-                    erro = True
+                    while comeco != '':
+                        comeco = input('Aperte ENTER para continuar...')
                     id += 1
-                    continue
-            if resposta == 'pula':
-                if pula > 0:
+                    Pergunta = sorteia_questao_inedida(dic_questoes,niveis[n//3], sort)
+                    correta = Pergunta['correta']
+                    pergunta_texto = questao_para_texto(Pergunta, id)
+                    print(pergunta_texto)
+                erro == False
+                resposta = str(input('DIGITE SUA RESPOSTA: '))
+                if resposta == 'ajuda':
+                    if ajuda > 0:
+                        print(gera_ajuda(Pergunta))
+                        resposta = str(input('DIGITE SUA NOVA RESPOSTA: '))    
+                        ajuda -= 1
+                    else:
+                        print('VOCE NÃO TEM MAIS AJUDAS') 
+                        erro = True
+                        id += 1
+                        continue
+                if resposta == 'pula':
+                    if pula > 0:
+                        i += 1
+                        pula -= 1
+                        continue
+                    else:
+                        print('Voce não tem mais pulos')
+                        erro = True
+                        id += 1
+                        continue
+                if resposta == 'parar':
+                    para = 1
+                    break
+                if resposta == correta:
+                    Premio += dic_premio[id]
+                    cprint('Você acertou! Seu prêmio atual é de R$ {},00'.format(Premio), 'green')
                     i += 1
-                    pula -= 1
+                if resposta != correta and resposta in ('A', 'B', 'C', 'D'):
+                    cprint('Que pena! Você errou e vai sair sem nada :(', 'yellow')
+                    i += 9999
+                    sai_sem_nada = 1
+                if resposta not in ('A', 'B', 'C', 'D', 'ajuda', 'pula', 'parar'):
+                    cprint('Opção invalida!', 'red')
+                    cprint('''As opções de respostas são 'A', 'B', 'C', 'D', 'ajuda', 'pula' e 'parar'!
+    ''', 'cyan')
+                    resposta = str(input('Digite sua resposta: '))
                     continue
-                else:
-                    print('Voce não tem mais pulos')
-                    erro = True
-                    id += 1
-                    continue
-            if resposta == 'parar':
-                break
-            if resposta == correta:
-                Premio += dic_premio[id]
-                cprint('Você acertou! Seu prêmio atual é de R$ {},00'.format(Premio), 'green')
-                i += 1
-            if resposta != correta and resposta in ('A', 'B', 'C', 'D'):
-                cprint('Que pena! Você errou e vai sair sem nada :(', 'yellow')
-                i += 9999
-                sai_sem_nada = 1
-            if resposta not in ('A', 'B', 'C', 'D', 'ajuda', 'pula', 'parar'):
-                cprint('Opção invalida!', 'red')
-                cprint('''As opções de respostas são 'A', 'B', 'C', 'D', 'ajuda', 'pula' e 'parar'!
-''', 'cyan')
-                resposta = str(input('Digite sua resposta: '))
-                continue
-            n += 1    
+                n += 1    
 
 #Codigo principal - DIFICEIS
-        if sai_sem_nada == 0:
-            print('Prepare-se! Vamos agora para as dificeis.')
-        erro = False
-        while i < 9:
-            if erro == False:
-                comeco = input('Aperte ENTER para continuar...')
-                while comeco != '':
-                    comeco = input('Aperte ENTER para continuar...')
-                id += 1
-                Pergunta = sorteia_questao_inedida(dic_questoes,niveis[n//3], sort)
-                correta = Pergunta['correta']
-                pergunta_texto = questao_para_texto(Pergunta, id)
-                print(pergunta_texto)
-            erro == False
-            resposta = str(input('DIGITE SUA RESPOSTA: '))
-            if resposta == 'ajuda':
-                if ajuda > 0:
-                    print(gera_ajuda(Pergunta))
-                    resposta = str(input('DIGITE SUA NOVA RESPOSTA: '))    
-                    ajuda -= 1
-                else:
-                    print('VOCE NÃO TEM MAIS AJUDAS')
-                    erro = True 
-                    id += 1
-                    continue
-            if resposta == 'pula':
-                if pula > 0:
-                    i += 1
-                    pula -= 1
-                    continue
-                else:
-                    print('Voce não tem mais pulos')
-                    erro = True
-                    id += 1
-                    continue
-            if resposta == 'parar':
-                break
-            if resposta == correta:
-                Premio += dic_premio[id]
-                cprint('Você acertou! Seu prêmio atual é de R$ {},00'.format(Premio), 'green')
-                i += 1
-            if resposta != correta and resposta in ('A', 'B', 'C', 'D'):
-                cprint('Que pena! Você errou e vai sair sem nada :(', 'yellow')
-                i += 9999
-                sai_sem_nada = 1
-            if resposta not in ('A', 'B', 'C', 'D', 'ajuda', 'pula', 'parar'):
-                cprint('Opção invalida!', 'red')
-                cprint('''As opções de respostas são 'A', 'B', 'C', 'D', 'ajuda', 'pula' e 'parar'!
-''', 'cyan')
-                resposta = str(input('Digite sua resposta: '))
-                continue
-            n += 1
-        break 
+            if para == 0:
+                if sai_sem_nada == 0:
+                    print('Prepare-se! Vamos agora para as dificeis.')
+                erro = False
+                while i < 9:
+                    if erro == False:
+                        comeco = input('Aperte ENTER para continuar...')
+                        while comeco != '':
+                            comeco = input('Aperte ENTER para continuar...')
+                        id += 1
+                        Pergunta = sorteia_questao_inedida(dic_questoes,niveis[n//3], sort)
+                        correta = Pergunta['correta']
+                        pergunta_texto = questao_para_texto(Pergunta, id)
+                        print(pergunta_texto)
+                    erro == False
+                    resposta = str(input('DIGITE SUA RESPOSTA: '))
+                    if resposta == 'ajuda':
+                        if ajuda > 0:
+                            print(gera_ajuda(Pergunta))
+                            resposta = str(input('DIGITE SUA NOVA RESPOSTA: '))    
+                            ajuda -= 1
+                        else:
+                            print('VOCE NÃO TEM MAIS AJUDAS')
+                            erro = True 
+                            id += 1
+                            continue
+                    if resposta == 'pula':
+                        if pula > 0:
+                            i += 1
+                            pula -= 1
+                            continue
+                        else:
+                            print('Voce não tem mais pulos')
+                            erro = True
+                            id += 1
+                            continue
+                    if resposta == 'parar':
+                        break
+                    if resposta == correta:
+                        Premio += dic_premio[id]
+                        cprint('Você acertou! Seu prêmio atual é de R$ {},00'.format(Premio), 'green')
+                        i += 1
+                    if resposta != correta and resposta in ('A', 'B', 'C', 'D'):
+                        cprint('Que pena! Você errou e vai sair sem nada :(', 'yellow')
+                        i += 9999
+                        sai_sem_nada = 1
+                    if resposta not in ('A', 'B', 'C', 'D', 'ajuda', 'pula', 'parar'):
+                        cprint('Opção invalida!', 'red')
+                        cprint('''As opções de respostas são 'A', 'B', 'C', 'D', 'ajuda', 'pula' e 'parar'!
+        ''', 'cyan')
+                        resposta = str(input('Digite sua resposta: '))
+                        continue
+                    n += 1
+                break 
 
 
     if sai_sem_nada <= 0:
@@ -488,7 +493,7 @@ else:
     print(valida)
 
 # perguntas estão repetidas e não estão de acordo com sua dificuldade
-
+# arrumar função parar 
 
 
 
