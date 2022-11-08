@@ -36,7 +36,7 @@ quest = [{'titulo': 'Qual o resultado da operação 57 + 32?',
          {'titulo': 'Qual destas não é uma fruta?',
           'nivel': 'facil',
           'opcoes': {'A': 'Laranja', 'B': 'Maça', 'C': 'Tomate', 'D': 'Abacate'},
-          'correta': 'B'},
+          'correta': 'C'},
 
          {'titulo': 'Em qual ano o TikTok atingiu 1 bilhão de usuários?',
           'nivel': 'facil',
@@ -320,15 +320,18 @@ while comeco != '':
 if valida == nova_lista:
     for nivel, lista_pergunta in dic_questoes.items():
         i = 0 
+        erro = False
         while i < 3:
-            comeco = input('Aperte ENTER para continuar...')
-            while comeco != '':
+            if erro == False:
                 comeco = input('Aperte ENTER para continuar...')
-            id += 1
-            Pergunta = sorteia_questao_inedida(dic_questoes,niveis[n//3], sort)
-            correta = Pergunta['correta']
-            pergunta_texto = questao_para_texto(Pergunta, id)
-            print(pergunta_texto)
+                while comeco != '':
+                    comeco = input('Aperte ENTER para continuar...')
+                id += 1
+                Pergunta = sorteia_questao_inedida(dic_questoes,niveis[n//3], sort)
+                correta = Pergunta['correta']
+                pergunta_texto = questao_para_texto(Pergunta, id)
+                print(pergunta_texto)
+            erro = False
             resposta = str(input('Qual sua resposta?! '))
             if resposta == 'ajuda':
                 if ajuda > 0:
@@ -337,7 +340,8 @@ if valida == nova_lista:
                     ajuda -= 1
                 else:
                     print('VOCE NÃO TEM MAIS AJUDAS')
-                    resposta = str(input('DIGITE SUA NOVA RESPOSTA: ')) 
+                    erro = True
+                    id += 1
                     continue
             if resposta == 'pula':
                 if pula > 0:
@@ -346,7 +350,8 @@ if valida == nova_lista:
                     continue
                 else:
                     print('Voce não tem mais pulos')
-                    resposta = str(input('DIGITE SUA NOVA RESPOSTA: '))
+                    erro = True
+                    id += 1
                     continue
             if resposta == 'parar':
                 break
@@ -367,16 +372,20 @@ if valida == nova_lista:
             n += 1
 
 #Codigo principal - MEDIAS
-        print('Boa! Você passou para o níel médio')
+        if sai_sem_nada == 0:
+            print('Boa! Você passou para o níel médio')
+        erro = False
         while i < 6:
-            comeco = input('Aperte ENTER para continuar...')
-            while comeco != '':
+            if erro == False:
                 comeco = input('Aperte ENTER para continuar...')
-            id += 1
-            Pergunta = sorteia_questao_inedida(dic_questoes,niveis[n//3], sort)
-            correta = Pergunta['correta']
-            pergunta_texto = questao_para_texto(Pergunta, id)
-            print(pergunta_texto)
+                while comeco != '':
+                    comeco = input('Aperte ENTER para continuar...')
+                id += 1
+                Pergunta = sorteia_questao_inedida(dic_questoes,niveis[n//3], sort)
+                correta = Pergunta['correta']
+                pergunta_texto = questao_para_texto(Pergunta, id)
+                print(pergunta_texto)
+            erro == False
             resposta = str(input('DIGITE SUA RESPOSTA: '))
             if resposta == 'ajuda':
                 if ajuda > 0:
@@ -384,8 +393,9 @@ if valida == nova_lista:
                     resposta = str(input('DIGITE SUA NOVA RESPOSTA: '))    
                     ajuda -= 1
                 else:
-                    print('VOCE NÃO TEM MAIS AJUDAS')
-                    resposta = str(input('DIGITE SUA NOVA RESPOSTA: ')) 
+                    print('VOCE NÃO TEM MAIS AJUDAS') 
+                    erro = True
+                    id += 1
                     continue
             if resposta == 'pula':
                 if pula > 0:
@@ -394,7 +404,8 @@ if valida == nova_lista:
                     continue
                 else:
                     print('Voce não tem mais pulos')
-                    resposta = str(input('DIGITE SUA NOVA RESPOSTA: '))
+                    erro = True
+                    id += 1
                     continue
             if resposta == 'parar':
                 break
@@ -415,15 +426,20 @@ if valida == nova_lista:
             n += 1    
 
 #Codigo principal - DIFICEIS
+        if sai_sem_nada == 0:
+            print('Prepare-se! Vamos agora para as dificeis.')
+        erro = False
         while i < 9:
-            comeco = input('Você está arrasando! se prepare para as perguntas dificeis.\nAperte ENTER para continuar...')
-            while comeco != '':
+            if erro == False:
                 comeco = input('Aperte ENTER para continuar...')
-            id += 1
-            Pergunta = sorteia_questao_inedida(dic_questoes,niveis[n//3], sort)
-            correta = Pergunta['correta']
-            pergunta_texto = questao_para_texto(Pergunta, id)
-            print(pergunta_texto)
+                while comeco != '':
+                    comeco = input('Aperte ENTER para continuar...')
+                id += 1
+                Pergunta = sorteia_questao_inedida(dic_questoes,niveis[n//3], sort)
+                correta = Pergunta['correta']
+                pergunta_texto = questao_para_texto(Pergunta, id)
+                print(pergunta_texto)
+            erro == False
             resposta = str(input('DIGITE SUA RESPOSTA: '))
             if resposta == 'ajuda':
                 if ajuda > 0:
@@ -432,7 +448,8 @@ if valida == nova_lista:
                     ajuda -= 1
                 else:
                     print('VOCE NÃO TEM MAIS AJUDAS')
-                    resposta = str(input('DIGITE SUA NOVA RESPOSTA: ')) 
+                    erro = True 
+                    id += 1
                     continue
             if resposta == 'pula':
                 if pula > 0:
@@ -441,7 +458,8 @@ if valida == nova_lista:
                     continue
                 else:
                     print('Voce não tem mais pulos')
-                    resposta = str(input('DIGITE SUA NOVA RESPOSTA: '))
+                    erro = True
+                    id += 1
                     continue
             if resposta == 'parar':
                 break
@@ -470,7 +488,7 @@ else:
     print(valida)
 
 # perguntas estão repetidas e não estão de acordo com sua dificuldade
-# erro quando as ajudas e/ou os pulos acabam
+
 
 
 
