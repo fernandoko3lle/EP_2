@@ -334,7 +334,6 @@ if valida == nova_lista:
                         cprint('HEY! Você passou para o nível MEDIO!',attrs=['bold'])
                     if i == 6:
                         cprint('Prepare-se! Vamos agora para as dificeis.', attrs=['bold'])
-                if erro == False:
                     comeco = input('Aperte ENTER para continuar...')
                     while comeco != '':
                         comeco = input('Aperte ENTER para continuar...')
@@ -347,9 +346,12 @@ if valida == nova_lista:
                 resposta = str(input('Qual sua resposta?! '))
                 if resposta == 'ajuda':
                     if ajuda > 0:
-                        print(gera_ajuda(Pergunta))
-                        resposta = str(input('DIGITE SUA NOVA RESPOSTA: '))    
                         ajuda -= 1
+                        print(gera_ajuda(Pergunta))
+                        resposta = str(input('Digite sua nova resposta: '))
+                        while resposta == 'ajuda':
+                            print('não pode pedir duas ajudas na mesma questão')
+                            resposta = str(input('Digite sua nova resposta: '))
                     else:
                         print('VOCE NÃO TEM MAIS AJUDAS')
                         erro = True
@@ -378,7 +380,7 @@ if valida == nova_lista:
                     continue
                 if resposta == correta:
                     Premio = dic_premio[id]
-                    cprint('Você acertou! Seu prêmio atual é de R$ {}.00'.format(Premio), 'green',attrs=['bold'])
+                    cprint('Você acertou! Seu prêmio atual é de R$ {0}.00'.format(Premio), 'green',attrs=['bold'])
                     i += 1
                 if resposta != correta and resposta in ('A', 'B', 'C', 'D'):
                     cprint('Que pena! Você errou e vai sair sem nada :(', 'yellow',attrs=['bold'])

@@ -322,7 +322,6 @@ print('\nO jogo já vai começar! Lá vem a primeira questão!')
 while comeco != '':
     comeco = input('Aperte ENTER para continuar...')
 if valida == nova_lista:
-    # for nivel, lista_pergunta in dic_questoes.items():
     i = 0 
     erro = False
     while joga == True:
@@ -335,7 +334,6 @@ if valida == nova_lista:
                         cprint('HEY! Você passou para o nível MEDIO!',attrs=['bold'])
                     if i == 6:
                         cprint('Prepare-se! Vamos agora para as dificeis.', attrs=['bold'])
-                if erro == False:
                     comeco = input('Aperte ENTER para continuar...')
                     while comeco != '':
                         comeco = input('Aperte ENTER para continuar...')
@@ -348,16 +346,16 @@ if valida == nova_lista:
                 resposta = str(input('Qual sua resposta?! '))
                 if resposta == 'ajuda':
                     if ajuda > 0:
-                        print('Ok, lá vem ajuda! Você ainda tem 1 ajudas!\n')
+                        print('Ok, lá vem ajuda! Você tem {0} ajudas restantes!\n'.format(ajuda))
+                        ajuda -= 1
                         comeco = input('Aperte ENTER para continuar...')
                         while comeco != '':
                             comeco = input('Aperte ENTER para continuar...')
                         cprint(gera_ajuda(Pergunta),'green', attrs=['bold'])
-                        comeco = input('Aperte ENTER para continuar...')
-                        while comeco != '':
-                            comeco = input('Aperte ENTER para continuar...')
-                        resposta = str(input('Qual sua resposta?! a'))    
-                        ajuda -= 1
+                        resposta = str(input('Qual sua resposta?! a'))
+                        while resposta == 'ajuda':
+                            print('não pode pedir duas ajudas na mesma questão')
+                            resposta = str(input('Digite sua nova resposta: '))   
                     else:
                         print('VOCE NÃO TEM MAIS AJUDAS')
                         erro = True
@@ -405,7 +403,10 @@ if valida == nova_lista:
             else:
                 break
         if sai_sem_nada <= 0:
-            cprint('PARABÉNS, você zerou o jogo e ganhou um milhão de reais!', 'green')
+            if Premio > 0:
+                cprint('PARABÉNS, você ganhou {0}!', 'green'.format(Premio))
+            else:
+                cprint('Poxa! Desistiu sem nada =(')
         joga_de_novo = str(input('Quer jogar novamente(sim/não)?'))
         if joga_de_novo == 'sim':
             joga = True
@@ -413,6 +414,7 @@ if valida == nova_lista:
             pula = 3
             ajuda = 2
             id = 0
+            c_p = 1
         else:
             joga = False 
             para = False
