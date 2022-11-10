@@ -312,10 +312,10 @@ dic_questoes = transforma_base(quest)
 # INTRODUÇÃO
 cprint('\nOlá! Você está na fortuna DesSoft e terá a oportunidade de enriquecer!', 'magenta',attrs=['bold'])
 nome = input('\nQual seu nome? ')
-cprint('''\nOk {0}, você tem direito a pular 3 vezes e 2 ajudas!'''.format(nome),attrs=['bold'])
+cprint('''\nOk {0}, você tem direito a pular 3 vezes e 2 ajudas!'''.format(nome.upper()),attrs=['bold'])
 cprint('''As opções de respostas são 'A', 'B', 'C', 'D', 'ajuda', 'pula' e 'parar'!
 ''', 'cyan',attrs=['bold'])
-comeco = input('\nAperte ENTER para continuar...')
+comeco = input('Aperte ENTER para continuar...')
 
 # JOGO
 print('\nO jogo já vai começar! Lá vem a primeira questão!')
@@ -330,7 +330,7 @@ if valida == nova_lista:
             if para == False:
                 if erro == False:
                     if i == 0:
-                        cprint('\nVamos começar com questões do nível FACIL!', attrs=['bold'])
+                        cprint('\nVamos começar com questões do nível FACIL!')
                     if i == 3:
                         cprint('HEY! Você passou para o nível MEDIO!',attrs=['bold'])
                     if i == 6:
@@ -348,8 +348,15 @@ if valida == nova_lista:
                 resposta = str(input('Qual sua resposta?! '))
                 if resposta == 'ajuda':
                     if ajuda > 0:
-                        print(gera_ajuda(Pergunta))
-                        resposta = str(input('DIGITE SUA NOVA RESPOSTA: '))    
+                        print('Ok, lá vem ajuda! Você ainda tem 1 ajudas!\n')
+                        comeco = input('Aperte ENTER para continuar...')
+                        while comeco != '':
+                            comeco = input('Aperte ENTER para continuar...')
+                        cprint(gera_ajuda(Pergunta),'green', attrs=['bold'])
+                        comeco = input('Aperte ENTER para continuar...')
+                        while comeco != '':
+                            comeco = input('Aperte ENTER para continuar...')
+                        resposta = str(input('Qual sua resposta?! a'))    
                         ajuda -= 1
                     else:
                         print('VOCE NÃO TEM MAIS AJUDAS')
@@ -359,7 +366,10 @@ if valida == nova_lista:
                 if resposta == 'pula':
                     if pula > 0:
                         pula -= 1
-                        print('Ok, pulando! Você ainda tem {0} pulos!'.format(pula))
+                        if pula == 0:
+                            print('Ok, pulando! ATENÇÃO: Você não tem mais direito a pulos!')
+                        else:
+                            print('Ok, pulando! Você ainda tem {0} pulos!'.format(pula))
                         comeco = input('Aperte ENTER para continuar...')
                         while comeco != '':
                             comeco = input('Aperte ENTER para continuar...')
@@ -370,7 +380,7 @@ if valida == nova_lista:
                         erro = True
                         continue
                     else:
-                        print('Voce não tem mais pulos')
+                        cprint('Não deu! Você não tem mais direito a pulos!','red', attrs=['bold'])
                         erro = True
                         id += 1
                         continue
@@ -395,7 +405,7 @@ if valida == nova_lista:
             else:
                 break
         if sai_sem_nada <= 0:
-            cprint('Parabens! Você vai levar {0},00 pra casa :)'.format(Premio), 'green')
+            cprint('PARABÉNS, você zerou o jogo e ganhou um milhão de reais!', 'green')
         joga_de_novo = str(input('Quer jogar novamente(sim/não)?'))
         if joga_de_novo == 'sim':
             joga = True
