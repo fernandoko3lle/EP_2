@@ -358,6 +358,10 @@ if valida == nova_lista:
                 if resposta == 'pula':
                     if pula > 0:
                         pula -= 1
+                        print('Ok, pulando! Você ainda tem {0} pulos!'.format(pula))
+                        comeco = input('Aperte ENTER para continuar...')
+                        while comeco != '':
+                            comeco = input('Aperte ENTER para continuar...')
                         Pergunta = sorteia_questao_inedida(dic_questoes,niveis[i//3], sort)
                         correta = Pergunta['correta']
                         pergunta_texto = questao_para_texto(Pergunta, id)
@@ -399,6 +403,7 @@ if valida == nova_lista:
             id = 0
         else:
             joga = False 
+            para = False
 else:
     print('Erro na lista de questoes')
     print(valida)
