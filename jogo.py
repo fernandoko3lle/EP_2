@@ -36,7 +36,7 @@ quest = [{'titulo': 'Qual o resultado da operação 57 + 32?',
          {'titulo': 'Qual destas não é uma fruta?',
           'nivel': 'facil',
           'opcoes': {'A': 'Laranja', 'B': 'Maça', 'C': 'Tomate', 'D': 'Abacate'},
-          'correta': 'C'},
+          'correta': 'B'},
 
          {'titulo': 'Em qual ano o TikTok atingiu 1 bilhão de usuários?',
           'nivel': 'facil',
