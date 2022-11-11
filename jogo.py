@@ -403,9 +403,11 @@ if valida == nova_lista:
             else:
                 break
         if sai_sem_nada <= 0:
-            if Premio > 0:
+            if Premio == 1000000:
+                cprint('voce é um novo milhãp')
+            if Premio > 0 and Premio != 1000000:
                 cprint('PARABÉNS, você ganhou {0}!'.format(Premio), 'green')
-            else:
+            if Premio == 0:
                 cprint('Poxa! Desistiu sem nada =(')
         joga_de_novo = str(input('Quer jogar novamente(sim/não)?'))
         if joga_de_novo == 'sim':
