@@ -346,8 +346,8 @@ if valida == nova_lista:
                 resposta = str(input('Qual sua resposta?! '))
                 if resposta == 'ajuda':
                     if ajuda > 0:
-                        print('Ok, lá vem ajuda! Você tem {0} ajudas restantes!\n'.format(ajuda))
                         ajuda -= 1
+                        print('Ok, lá vem ajuda! Você tem {0} ajudas restantes!\n'.format(ajuda))
                         comeco = input('Aperte ENTER para continuar...')
                         while comeco != '':
                             comeco = input('Aperte ENTER para continuar...')
@@ -404,7 +404,7 @@ if valida == nova_lista:
                 break
         if sai_sem_nada <= 0:
             if Premio > 0:
-                cprint('PARABÉNS, você ganhou {0}!', 'green'.format(Premio))
+                cprint('PARABÉNS, você ganhou {0}!'.format(Premio), 'green')
             else:
                 cprint('Poxa! Desistiu sem nada =(')
         joga_de_novo = str(input('Quer jogar novamente(sim/não)?'))
