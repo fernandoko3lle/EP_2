@@ -331,9 +331,9 @@ if valida == nova_lista:
                     if i == 0:
                         cprint('\nVamos começar com questões do nível FACIL!')
                     if i == 3:
-                        cprint('HEY! Você passou para o nível MEDIO!',attrs=['bold'])
+                        cprint('\nHEY! Você passou para o nível MEDIO!',attrs=['bold'])
                     if i == 6:
-                        cprint('Prepare-se! Vamos agora para as dificeis.', attrs=['bold'])
+                        cprint('\nPrepare-se! Vamos agora para as dificeis.', attrs=['bold'])
                     comeco = input('Aperte ENTER para continuar...')
                     while comeco != '':
                         comeco = input('Aperte ENTER para continuar...')
