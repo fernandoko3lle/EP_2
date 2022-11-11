@@ -409,17 +409,17 @@ if valida == nova_lista:
                 cprint('PARABÉNS, você ganhou {0}!'.format(Premio), 'green')
             if Premio == 0:
                 cprint('Poxa! Desistiu sem nada =(')
-        joga_de_novo = str(input('Quer jogar novamente(sim/não)?'))
-        if joga_de_novo == 'sim':
+        joga_de_novo = str(input('Quer jogar novamente(S/N)?'))
+        if joga_de_novo in ('S','s'):
             joga = True
             i = 0 
             pula = 3
             ajuda = 2
             id = 0
             c_p = 1
-        else:
+        elif joga_de_novo in ('N','n'):
             joga = False 
-            para = False
+            para = False   
 else:
     print('Erro na lista de questoes')
     print(valida)
