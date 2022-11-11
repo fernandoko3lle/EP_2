@@ -403,9 +403,10 @@ if valida == nova_lista:
             pula = 3
             ajuda = 2
             id = 0
+            para = False
         else:
             joga = False 
-            para = False
+            # para = False
 else:
     print('Erro na lista de questoes')
     print(valida)

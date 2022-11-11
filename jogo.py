@@ -417,9 +417,11 @@ if valida == nova_lista:
             ajuda = 2
             id = 0
             c_p = 1
-        elif joga_de_novo in ('N','n'):
+            para = False  
+        if joga_de_novo in ('N','n'):
             joga = False 
-            para = False   
 else:
     print('Erro na lista de questoes')
     print(valida)
+
+cprint('Jogo encerrado', 'red', attrs=['bold'])
