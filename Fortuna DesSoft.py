@@ -333,7 +333,7 @@ if valida == nova_lista:
                     if i == 3:
                         cprint('\nHEY! Você passou para o nível MEDIO!',attrs=['bold'])
                     if i == 6:
-                        cprint('\nPrepare-se! Vamos agora para as dificeis.', attrs=['bold'])
+                        cprint('\nHEY! Você passou para o nível DIFICIL!', attrs=['bold'])
                     comeco = input('Aperte ENTER para continuar...')
                     while comeco != '':
                         comeco = input('Aperte ENTER para continuar...')
@@ -357,7 +357,7 @@ if valida == nova_lista:
                             print('não pode pedir duas ajudas na mesma questão')
                             resposta = str(input('Digite sua nova resposta: '))   
                     else:
-                        print('VOCE NÃO TEM MAIS AJUDAS')
+                        cprint('Não deu! Você não tem mais direito a ajuda!', 'red', attrs=['bold'])
                         erro = True
                         id += 1
                         continue
@@ -383,8 +383,13 @@ if valida == nova_lista:
                         id += 1
                         continue
                 if resposta == 'parar':
-                    para = True
-                    continue
+                    r = input('\nDeseja mesmo parar [S/N]?? Caso responda "S", sairá com R$ {0}.00! '.format(Premio))
+                    if r == 'S':
+                        para = True
+                        continue
+                    while r != 'S' and r != 'N':
+                        cprint('Opção inválida!', 'red', attrs=['bold'])
+                        r = input('\nDeseja mesmo parar [S/N]?? Caso responda "S", sairá com R$ {0}.00! '.format(Premio))
                 if resposta == correta:
                     Premio = dic_premio[c_p]
                     cprint('Você acertou! Seu prêmio atual é de R$ {}.00'.format(Premio), 'green',attrs=['bold'])
@@ -395,19 +400,19 @@ if valida == nova_lista:
                     i += 9999
                     sai_sem_nada = 1
                 if resposta not in ('A', 'B', 'C', 'D', 'ajuda', 'pula', 'parar'):
-                    cprint('Opção invalida!', 'red')
+                    cprint('Opção invalida!', 'red', attrs=['bold'])
                     cprint('''As opções de respostas são 'A', 'B', 'C', 'D', 'ajuda', 'pula' e 'parar'!
-    ''', 'cyan')
+    ''', 'cyan', attrs=['bold'])
                     erro = True
                     continue
             else:
                 break
         if sai_sem_nada <= 0:
-            if Premio == 1000000:
-                cprint('voce é um novo milhãp')
-            if Premio > 0 and Premio != 1000000:
+            if Premio >= 1000000:
+                cprint('PARABÉNS, você zerou o jogo e ganhou um milhão de reais!', 'green', attrs = ['bold'])
+            elif Premio > 0 and Premio != 1000000:
                 cprint('PARABÉNS, você ganhou {0}!'.format(Premio), 'green')
-            if Premio == 0:
+            elif Premio == 0:
                 cprint('Poxa! Desistiu sem nada =(')
         joga_de_novo = str(input('Quer jogar novamente(S/N)?'))
         if joga_de_novo in ('S','s'):
