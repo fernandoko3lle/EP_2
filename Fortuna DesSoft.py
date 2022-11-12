@@ -352,7 +352,7 @@ if valida == nova_lista:
                         while comeco != '':
                             comeco = input('Aperte ENTER para continuar...')
                         cprint(gera_ajuda(Pergunta),'green', attrs=['bold'])
-                        resposta = str(input('Qual sua resposta?! a'))
+                        resposta = str(input('Qual sua resposta?!'))
                         while resposta == 'ajuda':
                             print('não pode pedir duas ajudas na mesma questão')
                             resposta = str(input('Digite sua nova resposta: '))   
