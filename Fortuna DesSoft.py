@@ -390,6 +390,10 @@ if valida == nova_lista:
                     while r != 'S' and r != 'N':
                         cprint('Opção inválida!', 'red', attrs=['bold'])
                         r = input('\nDeseja mesmo parar [S/N]?? Caso responda "S", sairá com R$ {0}.00! '.format(Premio))
+                    if r == 'N':
+                        i -= 1
+                        id -= 1
+                        erro = True
                 if resposta == correta:
                     Premio = dic_premio[c_p]
                     cprint('Você acertou! Seu prêmio atual é de R$ {}.00'.format(Premio), 'green',attrs=['bold'])
