@@ -513,11 +513,11 @@ if valida == nova_lista:
                 break
         if sai_sem_nada <= 0:
             if Premio >= 1000000:
-                cprint('PARABÉNS, você zerou o jogo e ganhou um milhão de reais!', 'green', attrs = ['bold'])
+                cprint('\nPARABÉNS, você zerou o jogo e ganhou um milhão de reais!', 'green', attrs = ['bold'])
             elif Premio > 0 and Premio != 1000000:
                 cprint('PARABÉNS, você ganhou {0}!'.format(Premio), 'green')
             elif Premio == 0:
-                cprint('Poxa! Desistiu sem nada =(')
+                cprint('\nPoxa! Desistiu sem nada =(')
         joga_de_novo = str(input('Quer jogar novamente(S/N)?'))
         if joga_de_novo in ('S','s'):
             joga = True
@@ -526,7 +526,8 @@ if valida == nova_lista:
             ajuda = 2
             id = 0
             c_p = 1
-            para = False  
+            para = False
+            sai_sem_nada = 0  
         if joga_de_novo in ('N','n'):
             joga = False 
 else:
