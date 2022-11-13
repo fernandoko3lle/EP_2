@@ -454,7 +454,7 @@ if valida == nova_lista:
                         cprint(gera_ajuda(Pergunta),'green', attrs=['bold'])
                         resposta = str(input('Qual sua resposta?!'))
                         while resposta == 'ajuda':
-                            print('não pode pedir duas ajudas na mesma questão')
+                            cprint('Não deu! Você já pediu ajuda nesta questão!', 'red', attrs=['bold'])
                             resposta = str(input('Digite sua nova resposta: '))   
                     else:
                         cprint('Não deu! Você não tem mais direito a ajuda!', 'red', attrs=['bold'])
