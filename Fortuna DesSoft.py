@@ -535,3 +535,5 @@ else:
     print(valida)
 
 cprint('Jogo encerrado', 'red', attrs=['bold'])
+
+#Versão final
